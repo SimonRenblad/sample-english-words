@@ -3,8 +3,8 @@
 
 block_cipher = None
 added_files = [
-    ('font/AnonymousPro-Regular.ttf', '/font'),
-    ('resources/words-alpha.txt', '/resources')
+    ('font/AnonymousPro-Regular.ttf', 'font'),
+    ('resources/words-alpha.txt', 'resources')
 ]
 
 a = Analysis(['runner.py'],
