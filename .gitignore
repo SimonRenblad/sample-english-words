@@ -1,1 +1,4 @@
 *.txt
+dist/runner
+build
+__pycache__
