@@ -27,3 +27,9 @@ pyinstaller runner.spec
  pip3 install pygame
  ```
 
+ # Additional Features
+ + Custom text available (not compatible with executable version)
+ + custom text cannot handle input that requires shift, ctrl etc.
+ 
+
+

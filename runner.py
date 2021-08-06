@@ -14,6 +14,13 @@ def sample():
 
     return sample_list
 
+def custom():
+    file_path_name = "resources/custom-list.txt"
+    with open(file_path_name) as f:
+        word_list = f.read().splitlines()
+
+    return list(word_list)
+
 LINE_LENGTH = 40
 NUM_LINES = 3
 FONT_SIZE_HEIGHT = 40
@@ -77,6 +84,11 @@ def run():
     set_sample = sample()
     paragraph = Paragraph(set_sample, -1)
     last_end = paragraph.end_word
+    button_color = pygame.Color("black")
+    text_color = pygame.Color("white")
+    smallfont = pygame.font.SysFont('Corbel',35)
+    button1text = smallfont.render('custom', True, text_color)
+    button2text = smallfont.render('default', True, text_color)
 
     cursor_location = 0
 
@@ -84,7 +96,14 @@ def run():
     while(running):
 
         screen.fill(pygame.Color("white"))
-        
+        mouse = pygame.mouse.get_pos()
+
+        #buttons to run random samples or custom ones
+        pygame.draw.rect(screen, button_color, [100, int(height/2), 140, 40])
+        pygame.draw.rect(screen, button_color, [300, int(height/2), 140, 40])
+        screen.blit(button1text, (110, int(height/2 + 10)))
+        screen.blit(button2text, (310, int(height/2) + 10))
+
         for l in paragraph.letters:
             color_c = (0,0,0)
             let = l.letter
@@ -116,6 +135,17 @@ def run():
                     else:
                         cursor_location += 1
                         paragraph.moveCursor(cursor_location)
-        
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if 100 <= mouse[0] <= 240 and int(height/2) <= mouse[1] <= int(height/2) + 40:
+                    #custom
+                    set_sample = custom()
+                    paragraph = Paragraph(set_sample, -1)
+                    last_end = paragraph.end_word
+                elif 300 <= mouse[0] <= 440 and int(height/2) <= mouse[1] <= int(height/2) + 40:
+                    #default
+                    set_sample = sample()
+                    paragraph = Paragraph(set_sample, -1)
+                    last_end = paragraph.end_word
+                    
 if __name__ == "__main__":
     run()
